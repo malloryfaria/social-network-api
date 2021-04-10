@@ -1,11 +1,22 @@
-# 18 NoSQL: Social Network API
+# NoSQL: Social Network API
 
-MongoDB is a popular choice for many social networks due to its speed with large amounts of data and flexibility with unstructured data. Over the last part of this course, you’ll use several of the technologies that social networking platforms use in their full-stack applications. Because the foundation of these applications is data, it’s important that you understand how to build and structure the API first.
+![GitHub license](https://img.shields.io/badge/license-MIT-ff69b4.svg)
 
-Your challenge is to build an API for a social network using Express.js for routing, a MongoDB database, and the Mongoose ODM. In addition to using the [Express](https://www.npmjs.com/package/express) and [Mongoose](https://www.npmjs.com/package/mongoose) packages, you may also optionally use a JavaScript date library of your choice or the native JavaScript `Date` object to format timestamps.
+## Table of Contents 
 
-Because this application won’t be deployed, you’ll also need to create a walkthrough video that demonstrates its functionality and all of the following acceptance criteria being met. You’ll need to submit a link to the video and add it to the README of your project.
+- [Description](#description)
+- [User Story](#user-story)
+- [Acceptance Criteria](#acceptance-criteria)
+- [Demo](#demo)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Languages](#languages)
+- [License](#license)
+- [Contributing](#contributing)
+- [Questions](#questions)
 
+## Description
+MongoDB is a popular choice for many social networks due to its speed with large amounts of data and flexibility with unstructured data. This is an API for a social network built using Express.js for routing, a MongoDB database, and the Mongoose ODM. In addition to using the [Express](https://www.npmjs.com/package/express) and [Mongoose](https://www.npmjs.com/package/mongoose) packages, it uses the native JavaScript `Date` object to format timestamps.
 
 ## User Story
 
@@ -14,8 +25,6 @@ AS A social media startup
 I WANT an API for my social network that uses a NoSQL database
 SO THAT my website can handle large amounts of unstructured data
 ```
-
-
 ## Acceptance Criteria
 
 ```md
@@ -29,9 +38,7 @@ THEN I am able to successfully create, update, and delete users and thoughts in 
 WHEN I test API POST and DELETE routes in Insomnia Core
 THEN I am able to successfully create and delete reactions to thoughts and add and remove friends to a user’s friend list
 ```
-
-
-## Mock-Up
+## Demo
 
 The following animations show examples of the application's API routes being tested in Insomnia Core.
 
@@ -56,158 +63,50 @@ The final animation shows the POST and DELETE routes for a user’s friend list 
 Your walkthrough video should also show the POST and DELETE routes for reactions to thoughts being tested in Insomnia Core.
 
 
-## Getting Started
+## Installation
 
-Use the following guidelines to set up your models and API routes:
-
-### Models
-
-**User**
-
-* `username`
-    * String
-    * Unique
-    * Required
-    * Trimmed
-
-* `email`
-    * String
-    * Required
-    * Unique
-    * Must match a valid email address (look into Mongoose's matching validation)
-
-* `thoughts`
-    * Array of `_id` values referencing the `Thought` model
-
-* `friends`
-    * Array of `_id` values referencing the `User` model (self-reference)
-
-**Schema Settings**
-
-Create a virtual called `friendCount` that retrieves the length of the user's `friends` array field on query
-
----
-
-**Thought**
-
-* `thoughtText`
-    * String
-    * Required
-    * Must be between 1 and 280 characters
-
-* `createdAt`
-    * Date
-    * Set default value to the current timestamp
-    * Use a getter method to format the timestamp on query
-
-* `username` - Which user created this thought
-    * String
-    * Required
-
-* `reactions` (like replies)
-    * Array of nested documents created with the `reactionSchema`
-
-**Schema Settings**
-
-Create a virtual called `reactionCount` that retrieves the length of the thought's `reactions` array field on query
-
----
-
-**Reaction** (SCHEMA ONLY)
-
-* `reactionId`
-    * Use Mongoose's ObjectId data type
-    * Default value is set to a new ObjectId
-
-* `reactionBody`
-    * String
-    * Required
-    * 280 character maximum
-
-* `username`
-    * String
-    * Required
-
-* `createdAt`
-    * Date
-    * Set default value to the current timestamp
-    * Use a getter method to format the timestamp on query
-
-**Schema Settings**
-
-This will not be a model, but rather used as the `reaction` field's subdocument schema in the `Thought` model.
-
-
-### API Routes
-
-**`/api/users`**
-
-* `GET` all users
-
-* `GET` a single user by its `_id` and populated thought and friend data
-
-* `POST` a new user:
-
-```json
-// example data
-{
-  "username": "lernantino",
-  "email": "lernantino@gmail.com"
-}
 ```
+// Clone the repository to your local machine using:|
 
-* `PUT` to update a user by its `_id`
+git clone git@github.com:malloryfaria/social-network-api.git
 
-* `DELETE` to remove user by its `_id`
+// Install all the dependencies by typing code:
+npm i
 
-**BONUS**: Remove a user's associated thoughts when deleted
+// Ensure you have set up MongoDB
 
----
+// Connect it to your front end by add the Public folder, html routes, CSS, images, etc.
 
-**`/api/users/:userId/friends/:friendId`**
+// Then use the below command to start the server:
+npm start
 
-* `POST` to add a new friend to a user's friend list
-
-* `DELETE` to remove a friend from a user's friend list
-
----
-
-**`/api/thoughts`**
-
-* `GET` to get all thoughts
-
-* `GET` to get a single thought by its `_id`
-
-* `POST` to create a new thought (don't forget to push the created thought's `_id` to the associated user's `thoughts` array field)
-
-```json
-// example data
-{
-  "thoughtText": "Here's a cool thought...",
-  "username": "lernantino",
-  "userId": "5edff358a0fcb779aa7b118b"
-}
 ```
+## Usage
+Use this api to set up a social network site.
+## Languages/Technology Used
+[Express](https://expressjs.com/ "Express")<br />
+[Node](https://nodejs.org/en/docs/ "Node")<br />
+[MongoDB](https://www.mongodb.com/ "MongoDB")<br />
+[Mongoose](https://www.npmjs.com/package/mongoose "Mongoose")<br />
+[Javascript](https://www.javascript.com/ "Javascript")<br />
 
-* `PUT` to update a thought by its `_id`
+  
+## Contributing
+If you would like to contribute, please reach out to us. You can find our contact information in the  "Questions?" section below.
 
-* `DELETE` to remove a thought by its `_id`
+## Questions?
 
----
+If you have any questions about the project, contact us at: https://github.com/orgs/P-I-M/people
 
-**`/api/thoughts/:thoughtId/reactions`**
+## License
 
-* `POST` to create a reaction stored in a single thought's `reactions` array field
+This project is licensed under the MIT license.
 
-* `DELETE` to pull and remove a reaction by the reaction's `reactionId` value
+Copyright (c) 2021 
 
-## Review
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
-You are required to submit BOTH of the following for review:
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
-* A walkthrough video demonstrating the functionality of the application and all of the acceptance criteria being met.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-* The URL of the GitHub repository. Give the repository a unique name and include a README describing the project.
-
-- - -
-© 2021 Trilogy Education Services, LLC, a 2U, Inc. brand. Confidential and Proprietary. All Rights Reserved.
