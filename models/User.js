@@ -13,10 +13,16 @@ const UserSchema = new Schema(
       lowercase: true,
       unique: true,
       required: 'You need to provide an email!',
-      // TODO: add in an email validator? To check documentation
+      // run email against an email regex
+      match: [/^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/],
       trim: true
      },
-    thoughts: [],
+    thoughts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'Thought'
+      }
+    ],
     friends: [
       {
         type: Schema.Types.ObjectId,

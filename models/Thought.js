@@ -9,10 +9,10 @@ const ReactionSchema = new Schema(
       default: () => new Types.ObjectId()
     },
     reactionBody: {
-      // TODO: Add limit of 280 characters maximum
       type: String,
       trim: true,
-      required: true
+      required: true,
+      maxLength: 280
     },
     username: {
       type: String,
@@ -40,7 +40,8 @@ const ThoughtSchema = new Schema(
     thoughtText: {
       type: String,
       required: true,
-      // TODO: must be between 1 and 280 characters
+      minLength: 1,
+      maxLength: 280
     },
     createdAt: {
       type: Date,
@@ -61,12 +62,9 @@ const ThoughtSchema = new Schema(
 
   // get total count of thoughts and reactions on retrieval
   ThoughtSchema.virtual('reactionCount').get(function() {
-    return this.thoughts.reduce((total, thought) => total + thought.reactions.length + 1, 0);
+    return this.reactions.length;
   });
 
 const Thought = model('Thought', ThoughtSchema);
-ThoughtSchema.virtual('thoughtCount').get(function() {
-  return this.thoughts.length;
-});
 
 module.exports = Thought;
